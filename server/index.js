@@ -10,7 +10,7 @@ const server = http.createServer(app);
 
 const io = new Server(server, {
   cors: {
-    origin: "http://localhost:3000", // Ensure this is the correct port of your React frontend
+    origin: "https://66e541992757670c7047b372--statuesque-malasada-4ee54b.netlify.app/", // Ensure this is the correct port of your React frontend
     methods: ["GET", "POST"],
   },
 });
