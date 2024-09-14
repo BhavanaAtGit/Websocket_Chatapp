@@ -4,13 +4,17 @@ const http = require("http");
 const { Server } = require("socket.io");
 const cors = require("cors");
 
-app.use(cors());
+// Apply CORS middleware to allow requests from the Netlify domain
+app.use(cors({
+  origin: 'https://66e541992757670c7047b372--statuesque-malasada-4ee54b.netlify.app', // Ensure this is the correct origin of your Netlify frontend
+  methods: ["GET", "POST"],
+}));
 
 const server = http.createServer(app);
 
 const io = new Server(server, {
   cors: {
-    origin: "https://66e541992757670c7047b372--statuesque-malasada-4ee54b.netlify.app/", // Ensure this is the correct port of your React frontend
+    origin: 'https://66e541992757670c7047b372--statuesque-malasada-4ee54b.netlify.app', // Ensure this is the correct origin of your Netlify frontend
     methods: ["GET", "POST"],
   },
 });
