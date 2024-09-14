@@ -3,7 +3,7 @@ import io from "socket.io-client";
 import { useEffect, useState, useRef } from "react";
 
 // Ensure you're connecting to the right server (use the correct port if different)
-const socket = io("http://localhost:3001");
+const socket = io("https://websocket-chatapp-21kt.onrender.com/");
 
 function App() {
   const [userType, setUserType] = useState(""); // 'attendant' or 'passenger'
