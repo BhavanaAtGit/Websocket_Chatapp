@@ -6,7 +6,7 @@ const cors = require("cors");
 
 // Apply CORS middleware to allow requests from the Netlify domain
 app.use(cors({
-  origin: 'https://66e541992757670c7047b372--statuesque-malasada-4ee54b.netlify.app', // Ensure this is the correct origin of your Netlify frontend
+  origin: 'https://websocketchatapp.netlify.app/', // Ensure this is the correct origin of your Netlify frontend
   methods: ["GET", "POST"],
 }));
 
@@ -14,7 +14,7 @@ const server = http.createServer(app);
 
 const io = new Server(server, {
   cors: {
-    origin: 'https://66e541992757670c7047b372--statuesque-malasada-4ee54b.netlify.app', // Ensure this is the correct origin of your Netlify frontend
+    origin: 'https://websocketchatapp.netlify.app/', // Ensure this is the correct origin of your Netlify frontend
     methods: ["GET", "POST"],
   },
 });
