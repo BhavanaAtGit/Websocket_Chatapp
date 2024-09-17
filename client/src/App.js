@@ -1,8 +1,9 @@
+// App.js
 import "./App.css";
 import io from "socket.io-client";
 import { useEffect, useState, useRef } from "react";
 
-// Ensure you're connecting to the right server (use the correct port if different)
+// Connect to the local server (adjust port if necessary)
 const socket = io("https://websocket-chatapp-21kt.onrender.com/");
 
 function App() {
@@ -11,6 +12,17 @@ function App() {
   const [messageReceived, setMessageReceived] = useState([]);
   const [loggedIn, setLoggedIn] = useState(false);
   const chatBoxRef = useRef(null); // Reference to chat box for scrolling
+
+  // Hardcoded passenger details
+  const passengerDetails = {
+    name: "Anant Shah",
+    PNR: "544658",
+    seat: "45",
+    coach: "S2",
+  };
+
+  // Hardcoded attendant name
+  const attendantName = "Mr. Ramesh";
 
   const login = (type) => {
     setUserType(type);
@@ -36,6 +48,11 @@ function App() {
         { message: data.message, sent: false },
       ]);
     });
+
+    // Clean up the socket connection on unmount
+    return () => {
+      socket.off("receive_message");
+    };
   }, []);
 
   useEffect(() => {
@@ -60,6 +77,23 @@ function App() {
       ) : (
         <div className="chat-container">
           <h1>Chat with {userType === "attendant" ? "Passenger" : "Attendant"}</h1>
+          {userType === "attendant" ? (
+            <div className="user-info">
+              <div className="info-card">
+                <p><strong>Name:</strong> {passengerDetails.name}</p>
+                <p><strong>Seat:</strong> {passengerDetails.seat}</p>
+                <p><strong>Coach:</strong> {passengerDetails.coach}</p>
+              </div>
+            </div>
+          ) : (
+            <div className="user-info">
+              <div className="info-card">
+                <p>{attendantName} is going to assist you further.</p>
+                <button className="call-btn">Call</button>
+              </div>
+            </div>
+          )}
+          {/* <h1>Chat with {userType === "attendant" ? "Passenger" : "Attendant"}</h1> */}
           <div className="chat-box" ref={chatBoxRef}>
             {messageReceived.map((msg, index) => (
               <div

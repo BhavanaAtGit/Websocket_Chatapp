@@ -1,12 +1,13 @@
+// index.js
 const express = require("express");
 const app = express();
 const http = require("http");
 const { Server } = require("socket.io");
 const cors = require("cors");
 
-// Apply CORS middleware to allow requests from the Netlify domain
+// Apply CORS middleware to allow requests from localhost
 app.use(cors({
-  origin: 'https://websocketchatapp.netlify.app', // Ensure this is the correct origin of your Netlify frontend without trailing slash
+  origin: 'https://websocketchatapp.netlify.app', // The URL of your frontend running locally
   methods: ["GET", "POST"],
 }));
 
@@ -14,7 +15,7 @@ const server = http.createServer(app);
 
 const io = new Server(server, {
   cors: {
-    origin: 'https://websocketchatapp.netlify.app', // Ensure this is the correct origin of your Netlify frontend without trailing slash
+    origin: 'https://websocketchatapp.netlify.app',// The URL of your frontend running locally
     methods: ["GET", "POST"],
   },
 });
